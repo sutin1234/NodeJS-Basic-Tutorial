@@ -1,0 +1,24 @@
+<title>WebClient-Server NodeJS</title>
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+<script src="/jquery/dist/jquery.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="styles/style.css">
+
+<% include nav/nav-top.html %>
+    <div class="div">
+        <form method="post" action="/postData">
+            <div class="inline-div">
+                <label>Name: </label>
+                <input type="text" name="name">
+            </div>
+            <div class="inline-div">
+                <label>LastName: </label>
+                <input type="text" name="last_name">
+            </div>
+            <div class="inline-div">
+                <button type="submit">PostData</button>
+            </div>
+        </form>
+    </div>
+    8888888
+    <% include nav/nav-footer.html %>

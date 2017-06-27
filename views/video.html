@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<style>
+    #player {
+        display: flex;
+    }
+    
+    #player div {
+        border: 1 px solid #ccc;
+    }
+    
+    #outterProgressBar {
+        padding: 0;
+        border: 1px solid #ccc;
+        width: 500px;
+    }
+    
+    #outterProgressBar #progressBar {
+        border-radius: 5px;
+        background-color: red;
+        width: 0%;
+        height: 5px;
+    }
+    
+    #currentTimeDiv {
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+        width: 0%;
+    }
+</style>
+<script>
+    function onPlay() {
+        var video = document.getElementById("video");
+        var currentTimeDiv = document.getElementById("currentTimeDiv");
+        //var durationTime = document.getElementById("durationTime");
+        var progressBar = document.getElementById("progressBar");
+        progressBar.style.backgroundColor = "red";
+        progressBar.style.width = "0%";
+
+        video.play();
+        setTiming(video, currentTimeDiv, progressBar);
+        //setDuration(video, durationTime);
+    }
+
+    function onPause() {
+        var video = document.getElementById("video");
+        video.pause();
+    }
+
+    function onPausePlay() {
+        var video = document.getElementById("video");
+        if (video.paused == false) {
+            video.pause();
+        } else {
+            video.play();
+        }
+    }
+
+    function onStop() {
+        var video = document.getElementById("video");
+        video.currentTime = 0;
+        video.pause();
+        var progressBar = document.getElementById("progressBar");
+        progressBar.style.width = "0%";
+    }
+
+    function setTiming(video, timeDiv, progressBardiv) {
+        var video = document.getElementById("video");
+        var TotalTime = ((video.duration.toFixed(0) * 10) - 30) / 100; //100
+
+
+        setInterval(function() {
+
+            //timeDiv.innerHTML = " " + (video.currentTime.toFixed(0) * 10) - 30 + " ";
+            progressBardiv.style.width = (video.currentTime.toFixed(0) * 10) - 30 + "%";
+
+        }, 100);
+    }
+
+    function setDuration(video, timeDiv) {
+        timeDiv.innerHTML = " " + video.duration.toFixed(0) + " ";
+    }
+
+    function setProgressBar(video, progressBardiv) {
+        progressBardiv.style.width = video.duration.toFixed(0) + "px;";
+    }
+</script>
+
+<video width="500" height="400" id="video">
+  <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+  <source src="https://www.w3schools.com/html/movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<div>
+    <div id="player">
+        <div id="outterProgressBar">
+            <div id="progressBar">
+                <div id="currentTimeDiv"></div>
+            </div>
+        </div>
+
+    </div>
+    <button onclick="onPlay()">Play</button>
+    <button onclick="onPause()">Pause</button>
+    <button onclick="onPausePlay()">Play/Pause</button>
+    <button onclick="onStop()">Stop</button>
+</div>
